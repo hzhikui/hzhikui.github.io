@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="CTF,实验吧，登陆一下好吗？？" />
+  <meta name="keywords" content="PE," />
 
 
 
@@ -79,20 +79,18 @@
 
 
 
-<meta name="keywords" content="CTF,实验吧，登陆一下好吗？？">
+<meta name="description" content="0x00概念文件偏移地址（File Offset）文件在磁盘上存放时相对于文件开头的偏移 装载基址（Image Base）PE装入内存是的基地址。默认情况下，EXE文件在内存中的基地址是0x00400000，DLL文件是0x10000000。 虚拟内存地址（Virtual Address，VA）PE文件中的指令被装入内存后的地址。 相对虚拟地址（Relative Virtual Address，R">
+<meta name="keywords" content="PE">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实验吧：登陆一下好吗？？">
-<meta property="og:url" content="http://hzhikui.github.io/2017/09/07/实验吧：登陆一下好吗？？/index.html">
+<meta property="og:title" content="RVA与FOA转换">
+<meta property="og:url" content="http://hzhikui.github.io/2020/01/09/RVA与FOA转换/index.html">
 <meta property="og:site_name" content="Dooo">
+<meta property="og:description" content="0x00概念文件偏移地址（File Offset）文件在磁盘上存放时相对于文件开头的偏移 装载基址（Image Base）PE装入内存是的基地址。默认情况下，EXE文件在内存中的基地址是0x00400000，DLL文件是0x10000000。 虚拟内存地址（Virtual Address，VA）PE文件中的指令被装入内存后的地址。 相对虚拟地址（Relative Virtual Address，R">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://picture-1253289065.cos.ap-beijing.myqcloud.com/17-9-7/90423240.jpg">
-<meta property="og:image" content="https://picture-1253289065.cos.ap-beijing.myqcloud.com/17-9-7/94075253.jpg">
-<meta property="og:image" content="https://picture-1253289065.cos.ap-beijing.myqcloud.com/17-9-7/75297182.jpg">
-<meta property="og:image" content="https://picture-1253289065.cos.ap-beijing.myqcloud.com/17-9-7/56997484.jpg">
-<meta property="og:updated_time" content="2019-09-10T14:21:15.916Z">
+<meta property="og:updated_time" content="2020-01-11T00:36:23.469Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="实验吧：登陆一下好吗？？">
-<meta name="twitter:image" content="https://picture-1253289065.cos.ap-beijing.myqcloud.com/17-9-7/90423240.jpg">
+<meta name="twitter:title" content="RVA与FOA转换">
+<meta name="twitter:description" content="0x00概念文件偏移地址（File Offset）文件在磁盘上存放时相对于文件开头的偏移 装载基址（Image Base）PE装入内存是的基地址。默认情况下，EXE文件在内存中的基地址是0x00400000，DLL文件是0x10000000。 虚拟内存地址（Virtual Address，VA）PE文件中的指令被装入内存后的地址。 相对虚拟地址（Relative Virtual Address，R">
 
 
 
@@ -122,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://hzhikui.github.io/2017/09/07/实验吧：登陆一下好吗？？/"/>
+  <link rel="canonical" href="http://hzhikui.github.io/2020/01/09/RVA与FOA转换/"/>
 
 
 
 
 
-  <title>实验吧：登陆一下好吗？？ | Dooo</title>
+  <title>RVA与FOA转换 | Dooo</title>
   
 
 
@@ -235,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://hzhikui.github.io/2017/09/07/实验吧：登陆一下好吗？？/">
+    <link itemprop="mainEntityOfPage" href="http://hzhikui.github.io/2020/01/09/RVA与FOA转换/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhikui">
@@ -252,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">实验吧：登陆一下好吗？？</h1>
+          <h1 class="post-title" itemprop="name headline">RVA与FOA转换</h1>
         
 
         <div class="post-meta">
@@ -264,8 +262,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-07T19:59:59+08:00">
-                2017-09-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-09T17:07:59+08:00">
+                2020-01-09
               </time>
             
 
@@ -274,28 +272,6 @@
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -324,24 +300,13 @@
       
 
       
-        <p><img src="https://picture-1253289065.cos.ap-beijing.myqcloud.com/17-9-7/90423240.jpg" alt=""></p>
-<a id="more"></a>
-<p>打开解题链接后为下图界面，猜想此题目考察SQL注入</p>
-<p><img src="https://picture-1253289065.cos.ap-beijing.myqcloud.com/17-9-7/94075253.jpg" alt=""></p>
-<p>我们知道一般的SQL验证语句为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from users where username = &apos;xxx&apos; and password = &apos;xxx&apos;</div></pre></td></tr></table></figure></p>
-<p>令username= ‘ or 1=1# , 则后台SQL语句被拼接为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from users where username = &apos;&apos; or 1=1 #&apos;and password = &apos;xxx&apos;</div></pre></td></tr></table></figure></p>
-<p>显然此SQL语句恒成立<br>输入测试字符，发现and , # ，均被过滤，但没有过滤单引号</p>
-<p><img src="https://picture-1253289065.cos.ap-beijing.myqcloud.com/17-9-7/75297182.jpg" alt=""></p>
-<p>构造输入为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">username = &apos; =&apos;</div><div class="line">password = &apos; =&apos;</div></pre></td></tr></table></figure></p>
-<p>则后台的SQL语句为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from users where username = &apos;&apos; =&apos;&apos; and password = &apos;&apos; =&apos;&apos;</div></pre></td></tr></table></figure></p>
-<p>成功拿到flag</p>
-<p><img src="https://picture-1253289065.cos.ap-beijing.myqcloud.com/17-9-7/56997484.jpg" alt=""></p>
-<p>SQL过程解析:</p>
-<pre><code>当提交完构造的SQL语句时，username处变为 username = &apos;&apos; =&apos;&apos;
-此处有两个等于号，从左往右依次执行，username=&apos;&apos;为false，false=&apos;&apos; 为true；
-password处同理；
-1 and 1 最终结果为1，故可以查出数据库中所有结果。
-</code></pre>
+        <h3 id="0x00概念"><a href="#0x00概念" class="headerlink" title="0x00概念"></a>0x00概念</h3><h4 id="文件偏移地址（File-Offset）"><a href="#文件偏移地址（File-Offset）" class="headerlink" title="文件偏移地址（File Offset）"></a>文件偏移地址（File Offset）</h4><p>文件在磁盘上存放时相对于文件开头的偏移</p>
+<h4 id="装载基址（Image-Base）"><a href="#装载基址（Image-Base）" class="headerlink" title="装载基址（Image Base）"></a>装载基址（Image Base）</h4><p>PE装入内存是的基地址。默认情况下，EXE文件在内存中的基地址是0x00400000，DLL文件是0x10000000。</p>
+<h4 id="虚拟内存地址（Virtual-Address，VA）"><a href="#虚拟内存地址（Virtual-Address，VA）" class="headerlink" title="虚拟内存地址（Virtual Address，VA）"></a>虚拟内存地址（Virtual Address，VA）</h4><p>PE文件中的指令被装入内存后的地址。</p>
+<h4 id="相对虚拟地址（Relative-Virtual-Address，RVA）"><a href="#相对虚拟地址（Relative-Virtual-Address，RVA）" class="headerlink" title="相对虚拟地址（Relative Virtual Address，RVA）"></a>相对虚拟地址（Relative Virtual Address，RVA）</h4><p>相对虚拟地址是内存地址相对于映射基址的偏移量。</p>
+<h4 id="虚拟内存地址，映射基址，相对虚拟内存地址关系"><a href="#虚拟内存地址，映射基址，相对虚拟内存地址关系" class="headerlink" title="虚拟内存地址，映射基址，相对虚拟内存地址关系"></a>虚拟内存地址，映射基址，相对虚拟内存地址关系</h4><p>VA = Image Base + RVA  </p>
+<p>### </p>
+
       
     </div>
     
@@ -358,7 +323,7 @@ password处同理；
       
         <div class="post-tags">
           
-            <a href="/tags/CTF/" rel="tag"># CTF</a>
+            <a href="/tags/PE/" rel="tag"># PE</a>
           
         </div>
       
@@ -371,8 +336,8 @@ password处同理；
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/04/Metasploit-ms17-010模块利用/" rel="next" title="Metasploit ms17-010模块利用">
-                <i class="fa fa-chevron-left"></i> Metasploit ms17-010模块利用
+              <a href="/2020/01/09/SQL注入原理及总结/" rel="next" title="SQL注入原理及总结">
+                <i class="fa fa-chevron-left"></i> SQL注入原理及总结
               </a>
             
           </div>
@@ -380,10 +345,6 @@ password处同理；
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/09/SQL注入原理及总结/" rel="prev" title="SQL注入原理及总结">
-                SQL注入原理及总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -435,8 +396,17 @@ password处同理；
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -498,6 +468,22 @@ password处同理；
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x00概念"><span class="nav-number">1.</span> <span class="nav-text">0x00概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件偏移地址（File-Offset）"><span class="nav-number">1.1.</span> <span class="nav-text">文件偏移地址（File Offset）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#装载基址（Image-Base）"><span class="nav-number">1.2.</span> <span class="nav-text">装载基址（Image Base）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#虚拟内存地址（Virtual-Address，VA）"><span class="nav-number">1.3.</span> <span class="nav-text">虚拟内存地址（Virtual Address，VA）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相对虚拟地址（Relative-Virtual-Address，RVA）"><span class="nav-number">1.4.</span> <span class="nav-text">相对虚拟地址（Relative Virtual Address，RVA）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#虚拟内存地址，映射基址，相对虚拟内存地址关系"><span class="nav-number">1.5.</span> <span class="nav-text">虚拟内存地址，映射基址，相对虚拟内存地址关系</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
