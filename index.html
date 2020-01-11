@@ -308,8 +308,12 @@
 <h4 id="虚拟内存地址（Virtual-Address，VA）"><a href="#虚拟内存地址（Virtual-Address，VA）" class="headerlink" title="虚拟内存地址（Virtual Address，VA）"></a>虚拟内存地址（Virtual Address，VA）</h4><p>PE文件中的指令被装入内存后的地址。</p>
 <h4 id="相对虚拟地址（Relative-Virtual-Address，RVA）"><a href="#相对虚拟地址（Relative-Virtual-Address，RVA）" class="headerlink" title="相对虚拟地址（Relative Virtual Address，RVA）"></a>相对虚拟地址（Relative Virtual Address，RVA）</h4><p>相对虚拟地址是内存地址相对于映射基址的偏移量。</p>
 <h4 id="虚拟内存地址，映射基址，相对虚拟内存地址关系"><a href="#虚拟内存地址，映射基址，相对虚拟内存地址关系" class="headerlink" title="虚拟内存地址，映射基址，相对虚拟内存地址关系"></a>虚拟内存地址，映射基址，相对虚拟内存地址关系</h4><p>VA = Image Base + RVA  </p>
-<p>### </p>
-
+<h3 id="0x01文件对齐和内存对齐"><a href="#0x01文件对齐和内存对齐" class="headerlink" title="0x01文件对齐和内存对齐"></a>0x01文件对齐和内存对齐</h3><ul>
+<li>PE文件中的数据按照磁盘数据存放标准，以0x200字节为基本单位进行组织。当一个数据节（section）不足0x200字节时，不足的地方将被0x00填充；当一个数据节超过0x00字节时，下一个0x00块将分配给这个节使用。因此PE数据节的大小永远是0x00的整数倍。</li>
+<li>当代码装入内存后，将按照内存数据标准存放，并以0x1000字节为基本单位进行组织。类似的，不足将被补全，若超出将分配下一个0x1000为其所用。因此，内存中的节总是0x1000的整数倍。</li>
+</ul>
+<h3 id="0x02文件偏移地址与虚拟内存地址之间的换算关系"><a href="#0x02文件偏移地址与虚拟内存地址之间的换算关系" class="headerlink" title="0x02文件偏移地址与虚拟内存地址之间的换算关系"></a>0x02文件偏移地址与虚拟内存地址之间的换算关系</h3><p>文件偏移地址 = 虚拟内存地址（VA）- 装载基址（Image Base）-节偏移<br>= RVA - 节偏移  </p>
+<h3 id="0x03示例"><a href="#0x03示例" class="headerlink" title="0x03示例"></a>0x03示例</h3>
           
         
       
