@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JavaScript什么是JavaScriptJavaScript 是互联网上最流行的脚本语言，这门语言可用于 HTML 和 web，更可广泛用于服务器、PC、笔记本电脑、平板电脑和智能手机等设备。  JavaScript 是一种轻量级的编程语言 JavaScript 是可插入 HTML 页面的编程代码。 JavaScript 插入 HTML 页面后，可由所有的现代浏览器执行。">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript基础">
+<meta property="og:url" content="http://hzhikui.github.io/2020/03/06/Javascript基础/index.html">
+<meta property="og:site_name" content="Dooo">
+<meta property="og:description" content="JavaScript什么是JavaScriptJavaScript 是互联网上最流行的脚本语言，这门语言可用于 HTML 和 web，更可广泛用于服务器、PC、笔记本电脑、平板电脑和智能手机等设备。  JavaScript 是一种轻量级的编程语言 JavaScript 是可插入 HTML 页面的编程代码。 JavaScript 插入 HTML 页面后，可由所有的现代浏览器执行。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306103117.png">
+<meta property="og:image" content="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306103801.png">
+<meta property="og:image" content="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306104104.png">
+<meta property="og:image" content="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306104459.png">
+<meta property="og:image" content="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306104834.png">
+<meta property="og:image" content="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306105034.png">
+<meta property="og:image" content="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306110743.png">
+<meta property="og:image" content="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306110801.png">
+<meta property="og:image" content="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306112138.png">
+<meta property="og:image" content="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306112645.png">
+<meta property="og:image" content="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306112928.png">
+<meta property="og:image" content="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306113747.png">
+<meta property="og:image" content="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306121330.png">
+<meta property="og:image" content="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306121631.png">
+<meta property="og:updated_time" content="2020-03-06T04:19:28.859Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript基础">
+<meta name="twitter:description" content="JavaScript什么是JavaScriptJavaScript 是互联网上最流行的脚本语言，这门语言可用于 HTML 和 web，更可广泛用于服务器、PC、笔记本电脑、平板电脑和智能手机等设备。  JavaScript 是一种轻量级的编程语言 JavaScript 是可插入 HTML 页面的编程代码。 JavaScript 插入 HTML 页面后，可由所有的现代浏览器执行。">
+<meta name="twitter:image" content="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306103117.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://hzhikui.github.io/2020/03/06/Javascript基础/"/>
+
+
+
+
+
+  <title>Javascript基础 | Dooo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dooo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">the quieter you become, the more you are able to hear</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://hzhikui.github.io/2020/03/06/Javascript基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhikui">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dooo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Javascript基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-06T10:17:04+08:00">
+                2020-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><h3 id="什么是JavaScript"><a href="#什么是JavaScript" class="headerlink" title="什么是JavaScript"></a>什么是JavaScript</h3><p>JavaScript 是互联网上最流行的脚本语言，这门语言可用于 HTML 和 web，更可广泛用于服务器、PC、笔记本电脑、平板电脑和智能手机等设备。</p>
+<ul>
+<li>JavaScript 是一种轻量级的编程语言</li>
+<li>JavaScript 是可插入 HTML 页面的编程代码。</li>
+<li>JavaScript 插入 HTML 页面后，可由所有的现代浏览器执行。</li>
+</ul>
+<a id="more"></a>
+<h3 id="HTML中的存在方式"><a href="#HTML中的存在方式" class="headerlink" title="HTML中的存在方式"></a>HTML中的存在方式</h3><ol>
+<li><p>&lt;script&gt;&lt;/script&gt;标签中</p>
+<p><img src="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306103117.png" alt=""></p>
+</li>
+<li><p>在&lt;script&gt;的src属性或指定的外部文件中</p>
+<p><img src="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306103801.png" alt=""></p>
+</li>
+<li><p>在某个HTML事件处理器中，如onclick、onmouseover等</p>
+<p><img src="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306104104.png" alt=""></p>
+</li>
+</ol>
+<h2 id="DOM操作"><a href="#DOM操作" class="headerlink" title="DOM操作"></a>DOM操作</h2><h3 id="什么是DOM"><a href="#什么是DOM" class="headerlink" title="什么是DOM"></a>什么是DOM</h3><p>DOM全称为文档对象模型（Document Object Model）。是访问和操作HTML文档的标准方法，通过利用JavaScript来访问、操作HTML。</p>
+<p><img src="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306104459.png" alt=""></p>
+<h3 id="通过JavaScript来改变网页内容"><a href="#通过JavaScript来改变网页内容" class="headerlink" title="通过JavaScript来改变网页内容"></a>通过JavaScript来改变网页内容</h3><ol>
+<li><p>获取HTML元素内容</p>
+<ul>
+<li><p>获取元素：getElementByld()通过ID获取元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">x=<span class="built_in">document</span>.getElementById(<span class="string">"name"</span>);</div></pre></td></tr></table></figure>
+<p><img src="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306104834.png" alt=""></p>
+</li>
+<li><p>通过innerHTML获取对应的内容</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alert(<span class="string">'id为name的内容是'</span>+x.innerHTML);</div></pre></td></tr></table></figure>
+<p><img src="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306105034.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p>修改HTML元素内容</p>
+<ul>
+<li><p>先通过getElementById获取元素ID，然后通过innerHTML赋值修改元素内容。</p>
+<p><img src="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306110743.png" alt=""></p>
+<p><img src="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306110801.png" alt=""></p>
+</li>
+</ul>
+</li>
+<li><p>创建动态效果</p>
+<p>document.write()写入到HTML页面中</p>
+<p><img src="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306112138.png" alt=""></p>
+</li>
+<li><p>添加页面交互效果</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">利用时间属性，比如onclick</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">changetext</span>(<span class="params">id</span>)</span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    id.innerHTML=<span class="string">"欢迎参加web安全工程师学习"</span>;</div><div class="line">&#125;</div><div class="line">&lt;h2 onclick=<span class="string">"changetext(this)"</span>&gt;Click here &lt;<span class="regexp">/h2&gt;</span></div></pre></td></tr></table></figure>
+<p><img src="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306112645.png" alt=""></p>
+</li>
+<li><p>JavaScript常用事件</p>
+<p><img src="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306112928.png" alt=""></p>
+</li>
+</ol>
+<h2 id="BOM操作"><a href="#BOM操作" class="headerlink" title="BOM操作"></a>BOM操作</h2><h3 id="什么是BOM"><a href="#什么是BOM" class="headerlink" title="什么是BOM"></a>什么是BOM</h3><p>BOM全称：浏览器对象模型（Browser Object Model）。它使JavaScript有能力与浏览器进行“对话”。</p>
+<ol>
+<li><p>让浏览器弹出警告，通常用来证明漏洞存在（XSS）</p>
+<ul>
+<li>alert()：警告弹窗</li>
+<li>confirm()：确定弹窗</li>
+<li>prompt()：提示弹窗</li>
+</ul>
+</li>
+<li><p>获取cookie信息</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.cookie</div><div class="line">alert(<span class="built_in">document</span>.cookie)</div></pre></td></tr></table></figure>
+<p><img src="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306113747.png" alt=""></p>
+</li>
+<li><p>获取浏览器信息</p>
+<p>屏幕信息(window.)screen</p>
+<p><img src="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306121330.png" alt=""></p>
+</li>
+<li><p>获取/控制页面信息</p>
+<p>(window.)location</p>
+<p><img src="https://zhikui.oss-cn-beijing.aliyuncs.com/img/20200306121631.png" alt=""></p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/05/HTML概述/" rel="next" title="HTML概述">
+                <i class="fa fa-chevron-left"></i> HTML概述
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zhikui</p>
+              <p class="site-description motion-element" itemprop="description">kali linux</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript"><span class="nav-number">1.</span> <span class="nav-text">JavaScript</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是JavaScript"><span class="nav-number">1.1.</span> <span class="nav-text">什么是JavaScript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML中的存在方式"><span class="nav-number">1.2.</span> <span class="nav-text">HTML中的存在方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM操作"><span class="nav-number">2.</span> <span class="nav-text">DOM操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是DOM"><span class="nav-number">2.1.</span> <span class="nav-text">什么是DOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过JavaScript来改变网页内容"><span class="nav-number">2.2.</span> <span class="nav-text">通过JavaScript来改变网页内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BOM操作"><span class="nav-number">3.</span> <span class="nav-text">BOM操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是BOM"><span class="nav-number">3.1.</span> <span class="nav-text">什么是BOM</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhikui</span>
+
+  
+</div>
+<!--
+<p>
+  <a href="https://console.upyun.com/register/?invite=Syo_YZ-wH" target="_blank">
+  <img src="https://picture-1253289065.cos.ap-beijing.myqcloud.com/blog/upyunlog.png" style="width: 75px;" align="left">
+  </a>
+</p>
+-->
+
+<a href="https://console.upyun.com/register/?invite=Syo_YZ-wH" >又拍云 </a>
+
+<span class="post-meta-divider">|</span>
+
+<!-- 备案 -->
+<a href="http://www.miitbeian.gov.cn/" >鲁ICP备19047292号 </a>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
