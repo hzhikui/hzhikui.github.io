@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="SQL," />
+  <meta name="keywords" content="c语言 PWN," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="有时间再写吧。。">
-<meta name="keywords" content="SQL">
+<meta name="description" content="read()函数12#include &amp;lt;unistd.h&amp;gt;ssize_t read(int fd, void *buf, size_t count); read函数是负责从fd中读取内容.成功时,read返回实际所读的字节数,如果返回的值是0,表示已经读到文件的结束了. 小于0表示出现了错误.如果错误为EINTR说明读是由中断引起的, 如果是ECONNREST表示网络连接出了问题. 文">
+<meta name="keywords" content="c语言 PWN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL注入原理及总结">
-<meta property="og:url" content="http://hzhikui.github.io/2020/01/09/SQL注入原理及总结/index.html">
+<meta property="og:title" content="常见c语言函数及其用法">
+<meta property="og:url" content="http://hzhikui.github.io/2020/05/12/常见c语言函数及其用法/index.html">
 <meta property="og:site_name" content="Dooo">
-<meta property="og:description" content="有时间再写吧。。">
+<meta property="og:description" content="read()函数12#include &amp;lt;unistd.h&amp;gt;ssize_t read(int fd, void *buf, size_t count); read函数是负责从fd中读取内容.成功时,read返回实际所读的字节数,如果返回的值是0,表示已经读到文件的结束了. 小于0表示出现了错误.如果错误为EINTR说明读是由中断引起的, 如果是ECONNREST表示网络连接出了问题. 文">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-05-11T14:00:54.754Z">
+<meta property="og:updated_time" content="2020-05-12T08:47:21.742Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL注入原理及总结">
-<meta name="twitter:description" content="有时间再写吧。。">
+<meta name="twitter:title" content="常见c语言函数及其用法">
+<meta name="twitter:description" content="read()函数12#include &amp;lt;unistd.h&amp;gt;ssize_t read(int fd, void *buf, size_t count); read函数是负责从fd中读取内容.成功时,read返回实际所读的字节数,如果返回的值是0,表示已经读到文件的结束了. 小于0表示出现了错误.如果错误为EINTR说明读是由中断引起的, 如果是ECONNREST表示网络连接出了问题. 文">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://hzhikui.github.io/2020/01/09/SQL注入原理及总结/"/>
+  <link rel="canonical" href="http://hzhikui.github.io/2020/05/12/常见c语言函数及其用法/"/>
 
 
 
 
 
-  <title>SQL注入原理及总结 | Dooo</title>
+  <title>常见c语言函数及其用法 | Dooo</title>
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://hzhikui.github.io/2020/01/09/SQL注入原理及总结/">
+    <link itemprop="mainEntityOfPage" href="http://hzhikui.github.io/2020/05/12/常见c语言函数及其用法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zhikui">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">SQL注入原理及总结</h1>
+          <h1 class="post-title" itemprop="name headline">常见c语言函数及其用法</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-09T16:45:42+08:00">
-                2020-01-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-12T16:01:21+08:00">
+                2020-05-12
               </time>
             
 
@@ -300,7 +300,35 @@
       
 
       
-        <h3 id="有时间再写吧。。"><a href="#有时间再写吧。。" class="headerlink" title="有时间再写吧。。"></a>有时间再写吧。。</h3>
+        <h4 id="read-函数"><a href="#read-函数" class="headerlink" title="read()函数"></a>read()函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="keyword">ssize_t</span> read(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count);</div></pre></td></tr></table></figure>
+<p>read函数是负责从fd中读取内容.成功时,read返回实际所读的字节数,如果返回的值是0,表示已经读到文件的结束了.</p>
+<p>小于0表示出现了错误.如果错误为EINTR说明读是由中断引起的, 如果是ECONNREST表示网络连接出了问题.</p>
+<h4 id="文件描述符fd"><a href="#文件描述符fd" class="headerlink" title="文件描述符fd"></a>文件描述符fd</h4><p>整数值|名称|<unistd.h>符号常量|<stdio.h>文件流</stdio.h></unistd.h></p>
+<p>:-:|:-:|:-:|:-:</p>
+<p>0|Standard input|STDIN_FILENO|stdin</p>
+<p>1|Standard output|STDOUT_FILENO|stdout</p>
+<p>2|Standard error|STDERR_FILENO|stderr</p>
+<h4 id="write-函数"><a href="#write-函数" class="headerlink" title="write()函数"></a>write()函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">头文件:&lt;unistd.h&gt;</div><div class="line">write有两种用法。一种是：<span class="keyword">ssize_t</span> write(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbyte);</div><div class="line">fd：文件描述符；</div><div class="line">buf：指定的缓冲区，即指针，指向一段内存单元；</div><div class="line">nbyte：要写入文件指定的字节数；</div><div class="line">返回值：写入文档的字节数（成功）；<span class="number">-1</span>（出错）</div><div class="line">write函数把buf中nbyte写入文件描述符handle所指的文档，成功时返回写的字节数，错误时返回<span class="number">-1.</span></div><div class="line">另一种是：write（<span class="keyword">const</span> <span class="keyword">char</span>* str,<span class="keyword">int</span> n)</div><div class="line">str是字符指针或字符数组，用来存放一个字符串。n是<span class="keyword">int</span>型数，它用来表示输出显示字符串中字符的个数。</div><div class="line">write（<span class="string">"string"</span>,<span class="built_in">strlen</span>(<span class="string">"string"</span>);表示输出字符串常量</div></pre></td></tr></table></figure>
+<h4 id="open-函数"><a href="#open-函数" class="headerlink" title="open()函数"></a>open()函数</h4><p>open函数属于Linux中系统IO，用于“打开”文件，代码打开一个文件意味着获得了这个文件的访问句柄。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/types.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;sys/stat.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fcntl.h&gt;</span></span></div><div class="line"><span class="keyword">int</span> fd = open（参数<span class="number">1</span>，参数<span class="number">2</span>，参数<span class="number">3</span>）；</div><div class="line"><span class="keyword">int</span> fd = open（<span class="keyword">const</span> <span class="keyword">char</span> *pathname,<span class="keyword">int</span> flags,<span class="keyword">mode_t</span> mode）;</div></pre></td></tr></table></figure>
+<p>1.句柄（file descriptor 简称fd）</p>
+<p>首先每个文件都属于自己的句柄，例如标准输入是0，标准输出是1，标准出错是2。</p>
+<p>每打开一个文件就会返回句柄来操作这个文件，一般是从3开始，然后4,5,6一直下去。</p>
+<p>close（fd）之后句柄就返回给系统，例如打开一个文件后fd是3，close之后再打开另外一个文件也还是3，但代表的文件不一样了。</p>
+<h4 id="putenv-函数"><a href="#putenv-函数" class="headerlink" title="putenv()函数"></a>putenv()函数</h4><p>头文件</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></div></pre></td></tr></table></figure>
+<p>定义函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">putenv</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> * <span class="built_in">string</span>)</span></span>;</div></pre></td></tr></table></figure>
+<p>函数说明：putenv()用来改变或增加环境变量的内容. 参数string 的格式为name＝value, 如果该环境变量原先存在, 则变量内容会依参数string 改变, 否则此参数内容会成为新的环境变量.</p>
+<p>返回值：执行成功则返回0, 有错误发生则返回-1.</p>
+<p>错误代码：ENOMEM 内存不足, 无法配置新的环境变量空间.</p>
+<h4 id="strstr-函数"><a href="#strstr-函数" class="headerlink" title="strstr()函数"></a>strstr()函数</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span> *<span class="title">strstr</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *haystack, <span class="keyword">const</span> <span class="keyword">char</span> *needle)</span></span></div></pre></td></tr></table></figure>
+<ul>
+<li><strong>haystack</strong> – 要被检索的 C 字符串。</li>
+<li><strong>needle</strong> – 在 haystack 字符串内要搜索的小字符串。</li>
+</ul>
+<p>该函数返回在 haystack 中第一次出现 needle 字符串的位置，如果未找到则返回 null。</p>
+
       
     </div>
     
@@ -317,7 +345,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SQL/" rel="tag"># SQL</a>
+            <a href="/tags/c语言-PWN/" rel="tag"># c语言 PWN</a>
           
         </div>
       
@@ -330,8 +358,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/04/Metasploit-ms17-010模块利用/" rel="next" title="Metasploit ms17-010模块利用">
-                <i class="fa fa-chevron-left"></i> Metasploit ms17-010模块利用
+              <a href="/2020/05/11/PWN从入门到放弃/" rel="next" title="PWN从入门到放弃">
+                <i class="fa fa-chevron-left"></i> PWN从入门到放弃
               </a>
             
           </div>
@@ -339,10 +367,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/09/RVA与FOA转换/" rel="prev" title="RVA与FOA转换">
-                RVA与FOA转换 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -476,7 +500,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#有时间再写吧。。"><span class="nav-number">1.</span> <span class="nav-text">有时间再写吧。。</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#read-函数"><span class="nav-number">1.</span> <span class="nav-text">read()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件描述符fd"><span class="nav-number">2.</span> <span class="nav-text">文件描述符fd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#write-函数"><span class="nav-number">3.</span> <span class="nav-text">write()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#open-函数"><span class="nav-number">4.</span> <span class="nav-text">open()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#putenv-函数"><span class="nav-number">5.</span> <span class="nav-text">putenv()函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#strstr-函数"><span class="nav-number">6.</span> <span class="nav-text">strstr()函数</span></a></li></ol></div>
             
 
           </div>

